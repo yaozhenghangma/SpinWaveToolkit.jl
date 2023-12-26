@@ -1,12 +1,17 @@
 struct Bond
-    J::Float
-    displace::Vector{Float}
+    J::Float64
+    displace::Vector{Float64}
+    linked_site::Int
 end
 
-struct Site
+mutable struct Site
+    index::Int64
+    bonds::Vector{Bond}
 end
 
 struct Lattice
-    num_sites::Int
-    total_k::Int
+    num_sites::Int64
+    total_k::Int64
+    Jk::Array{Float64, 3}
+    Jkk::Array{Float64, 3}
 end
