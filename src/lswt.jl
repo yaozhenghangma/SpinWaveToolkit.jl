@@ -1,10 +1,3 @@
-using LinearAlgebra
-
-KB = 8.6173e-2
-gs = 2.02
-μB = 0.057884
-ħ = 1.0
-
 function lswt(lattice, T; S=1.0, A=0, B=0)
     kbt = 1.0/(T*KB)
     H = @. S*lattice.Jk

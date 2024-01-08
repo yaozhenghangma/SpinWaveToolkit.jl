@@ -1,8 +1,3 @@
-using Statistics
-using OMEinsum
-
-include("lswt.jl")
-
 function rswt(lattice, T; S=1.0, A=0, B=0, δ=1e-6, max_loop=1e4, λ=1.0)
     energies, occupation = lswt(lattice, T, S=S, A=A, B=B)
 
@@ -22,7 +17,7 @@ function rswt(lattice, T; S=1.0, A=0, B=0, δ=1e-6, max_loop=1e4, λ=1.0)
         end
 
         for ik in 1:lattice.total_k
-            energies[ik, :] = eigvals(H[ik, :, :])*λ + energies[ik, :]*(1-λ)
+            energies[ik, :] = abs.(eigvals(H[ik, :, :]))*λ + energies[ik, :]*(1-λ)
         end
         new_occupation = @. 1.0/(exp(energies*ħ*kbt) -1.0)
         new_occupation = sum(new_occupation, dims=2)

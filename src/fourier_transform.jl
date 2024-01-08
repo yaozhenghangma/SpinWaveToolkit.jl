@@ -1,8 +1,3 @@
-using OMEinsum
-
-include("lattice.jl")
-include("reciprocal_space.jl")
-
 function k_transform(k, bond)
     @ein Jk[i] := k[i, k] * bond.displace[k]
     return cos.(Jk) .* bond.J
