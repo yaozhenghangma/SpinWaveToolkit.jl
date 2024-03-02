@@ -13,5 +13,5 @@ struct Lattice
     num_sites::Int64
     total_k::Int64
     Jk::Array{Float64, 3}
-    Jkk::Array{Float64, 3}
+    Jkk::Array{Float64, 4}
 end

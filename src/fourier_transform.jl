@@ -14,14 +14,16 @@ function fourier(sites ,reciprocal_lattice, num_k)
     k = k_space(reciprocal_lattice, num_k)
     Δk = delta_k_mesh(reciprocal_lattice, num_k)
     Jk = zeros(total_k, num_sites, num_sites)
-    Jkk = zeros(num_sites, total_k, total_k)
+    #Jkk = zeros(num_sites, total_k, total_k)
+    Jkk = zeros(total_k, total_k, num_sites, num_sites)
 
     for site in sites
         for bond in site.bonds
             Jk[:, site.index, bond.linked_site] += k_transform(k, bond)
-            if bond.linked_site == site.index
-                Jkk[site.index, :, :] += k_mesh_transform(Δk, bond)
-            end
+            #if bond.linked_site == site.index
+            #    Jkk[site.index, :, :] += k_mesh_transform(Δk, bond)
+            #end
+            Jkk[:, :, site.index, bond.linked_site] += k_mesh_transform(Δk, bond)
         end
     end
 
