@@ -1,3 +1,4 @@
 function magnetism(occupation; S=1.0)
-    return S - mean(occupation)
+    @ein diag_occu[ik, ν] := occupation[ik, ν, ν]
+    return S - mean(diag_occu)
 end
