@@ -30,6 +30,7 @@
 
 function rswt(lattice, T; S=1.0, A=0, B=0, δ=1e-6, max_loop=1e4, λ=1.0)
     energies, occupation = lswt(lattice, T, S=S, A=A, B=B)
+    occupation = zeros(size(occupation))
 
     kbt = 1.0/(T*KB)
     loop_num = 0
@@ -80,6 +81,7 @@ function rswt(lattice, T; S=1.0, A=0, B=0, δ=1e-6, max_loop=1e4, λ=1.0)
         for ik in 1:lattice.total_k
             energies[ik, :], Λ[ik, :, :] = eigen(H[ik, :, :])
         end
+        energies = abs.(energies)
         fermi_func = @. 1.0/(exp(energies*ħ*kbt) -1.0)
         @ein new_occu[ik, ν1, ν2] := conj(Λ)[ik, ν1, σ] * Λ[ik, ν2, σ] * fermi_func[ik, σ]
         Δ = maximum(abs.(occupation-new_occu))
