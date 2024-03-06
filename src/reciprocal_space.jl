@@ -5,9 +5,9 @@ function k_space(reciprocal_lattice, num_k)
     for ix in range(0, 1, num_k[1]+1)[1:end-1],
         iy in range(0, 1, num_k[2]+1)[1:end-1],
         iz in range(0, 1, num_k[3]+1)[1:end-1]
-        k[index, :] = ix * reciprocal_lattice[1] +
-                      iy * reciprocal_lattice[2] +
-                      iz * reciprocal_lattice[3]
+        k[index, :] = cartesianize(
+            reduce_to_wignerseitz([ix, iy, iz], reciprocal_lattice),
+            reciprocal_lattice)
         index += 1
     end
     return k

@@ -1,5 +1,6 @@
 module MagnonRenormalization
 
+using Brillouin
 using LinearAlgebra
 using OMEinsum
 using Statistics
